@@ -1,4 +1,14 @@
 /*
+    /create [POST] todo
+        * request [ username ]
+        * response [ token,gameId ]
+        * tasks
+            * validate username
+            * generate gameId
+            * generate token
+            * create playground
+            * set status
+            * send response
 
     /join[POST] todo
         * request [ username,gameId ]
@@ -7,15 +17,6 @@
             * generate token
             * validate username
             * join to game
-            * send response
-
-    /create [POST] todo
-        * request [ username ]
-        * response [ token ]
-        * tasks
-            * generate token
-            * validate username
-            * create playground
             * send response
 
     /start [POST] todo

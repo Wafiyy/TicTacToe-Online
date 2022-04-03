@@ -3,6 +3,6 @@ const { Router } = require("express")
 
 const router = Router()
 
-router.get("/login",controller)
+router.post("/create",controller.create)
 
 module.exports = router

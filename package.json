@@ -4,7 +4,8 @@
   "description": "Tic Tac Toe game in NodeJs",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "test": "nodemon src/server.js"
   },
   "keywords": [
     "TicTacToe",
@@ -14,7 +15,9 @@
   "author": "Abror Alisherov",
   "license": "MIT",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "express": "^4.17.3",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "otp-generator": "^4.0.0"
   }
 }
