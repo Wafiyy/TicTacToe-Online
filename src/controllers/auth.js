@@ -26,6 +26,10 @@ function create(req,res){
       gameStart: false,
     }
     playground[gameId] = ["", "", "", "", "", "", "", "", ""]
+    process.db.game[gameId] = {
+      winnerId: null,
+      draw: false
+    }
     const token = sign({id: 1, username, gameId})
 
     console.log(token)

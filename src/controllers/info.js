@@ -11,6 +11,7 @@ function info(req,res){
         user,
         currentUser: turnUser,
         playground,
+        game: process.db.game[gameId]
     })
 }
 module.exports = info

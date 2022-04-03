@@ -21,9 +21,15 @@ process.db.users = {
                 isTurn: null,
             }
         ],
-        "gameStart": false
+        "gameStart": false,
     }
 }
 process.db.playground = {
     "121": ["","","","","","","","",""]
+}
+process.db.game = {
+    "121": {
+        winnerId: null,
+        draw: false
+    }
 }
