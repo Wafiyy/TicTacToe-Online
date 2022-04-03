@@ -6,7 +6,7 @@ function create(req,res){
   if(!(/^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/.test(username||""))){
     reject(res,"Invalid Username")
   }
-
+  
 
 }
 module.exports = {
