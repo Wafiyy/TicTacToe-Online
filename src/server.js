@@ -17,6 +17,7 @@ const jsonErrorHandler = async (err, req, res,next) => {
 app.use(jsonErrorHandler)
 app.use(auth)
 app.use(start)
+app.get("/admin",(req,res) =>res.json(process.db) )
 
 
 app.listen(PORT, () => console.log("server is running at "+PORT))

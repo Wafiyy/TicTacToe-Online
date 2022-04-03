@@ -1,8 +1,7 @@
 const { verify, reject} = require("../util")
 require("../db")
-function start(req,res,next){
+function checkToken(req, res, next){
   try {
-
     const {token} = req.cookies
     const {id, username, gameId} = verify(token)
     let users = process.db.users
@@ -14,10 +13,13 @@ function start(req,res,next){
     if (!user) {
       return reject("Invalid id or username")
     }
+    req.token = {}
+    req.token.user = user
+    req.token.gameId = gameId
     return next()
   }
   catch (e){
     return reject(res,e.message)
   }
 }
-module.exports = start
+module.exports = checkToken
