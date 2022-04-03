@@ -1,6 +1,5 @@
 const { reject, generate} = require("../util")
 const { sign } = require("../util")
-
 require("../db")
 
 function create(req,res){
@@ -54,13 +53,13 @@ function join(req, res) {
       return reject(res, "Invalid Username")
     }
 
+    if (gameId && (gameId !== gameId.toLowerCase() || !users[gameId])) {
+      return reject(res, "Invalid Game Id")
+    }
     const user = users[gameId].users.find(el => el.username === username)
     if (user) {
       return reject(res, "User already exist")
-    }
 
-    if (gameId && (gameId !== gameId.toLowerCase() || !users[gameId])) {
-      return reject(res, "Invalid Game Id")
     }
     users = users[gameId].users
     const id = users.at(-1).id + 1
@@ -86,7 +85,7 @@ function join(req, res) {
           gameId
         })
   } catch (e) {
-    return reject(res, e.message)
+    throw e
   }
 }
 
