@@ -1,0 +1,20 @@
+{
+  "name": "tictactoe-backend",
+  "version": "0.0.1",
+  "description": "Tic Tac Toe game in NodeJs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "keywords": [
+    "TicTacToe",
+    "NodeJs",
+    "NodeGame"
+  ],
+  "author": "Abror Alisherov",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
