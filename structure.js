@@ -1,5 +1,5 @@
 /*
-    /create [POST] todo
+    /create [POST]
         * request [ username ]
         * response [ token,gameId ]
         * tasks
@@ -14,8 +14,9 @@
         * request [ username,gameId ]
         * response [ token ]
         * tasks
-            * generate token
             * validate username
+            * validate gameId
+            * generate token
             * join to game
             * send response
 

@@ -39,11 +39,59 @@ function create(req,res){
               gameId,
             }
         )
-  }
-  catch (e){
-    return reject(res,e.message())
+  } catch (e) {
+    return reject(res, e.message())
   }
 }
+
+function join(req, res) {
+  try {
+    let {username, gameId} = req.body
+    let users = process.db.users
+    console.log(username, gameId)
+
+    if (!(/^(?=[a-zA-Z0-9._]{3,20}$)[^_.].*[^_.]$/.test(username))) {
+      return reject(res, "Invalid Username")
+    }
+
+    const user = users[gameId].users.find(el => el.username === username)
+    if (user) {
+      return reject(res, "User already exist")
+    }
+
+    if (gameId && (gameId !== gameId.toLowerCase() || !users[gameId])) {
+      return reject(res, "Invalid Game Id")
+    }
+    users = users[gameId].users
+    const id = users.at(-1).id + 1
+
+    const player = id <= 2
+    const isTurn = false
+
+    const token = sign({id, username, gameId})
+
+    users.push({
+      id,
+      username,
+      player,
+      isTurn
+    })
+
+
+    return res
+        .cookie("token", token)
+        .json({
+          ok: true,
+          message: "You successfully joined the game",
+          gameId
+        })
+  } catch (e) {
+    return reject(res, e.message)
+  }
+}
+
+
 module.exports = {
-  create
+  create,
+  join
 }
