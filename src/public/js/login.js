@@ -1,54 +1,51 @@
 "use strict";
 
-let sSubmit = document.querySelector("#signUp");
-let lSubmit = document.querySelector("#login");
-let host = "https://chatappnodejs23.herokuapp.com";
-sSubmit.addEventListener("click",async function () {
+let create = document.querySelector("#create");
+let join = document.querySelector("#join");
+let host = "";
+create.addEventListener("click",async function () {
     let username = document.querySelector("#signUsername")?.value;
-    let age = document.querySelector("#signAge")?.value;
-    let password = document.querySelector("#signPasswd")?.value;
 
-    const user = {
-        username,
-        age,
-        password
-    }
-
-    let data = await fetch(host + "/register", {
+    let data = await fetch(host + "/create", {
         method: "POST",
-        body: JSON.stringify(user),
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({username}),
     });
     data = await data.json();
     console.log(data)
-    if (data?.status !== 200) {
+    if (!data?.ok) {
         return alert(data.message)
     }
-    window.localStorage.setItem("user",data.user)
-    window.location = "../"
+    window.localStorage.setItem("gameId",data.gameId)
+    window.location = "/"
 });
 
-lSubmit.addEventListener("click", async () => {
-    let username = document.querySelector("#logname").value;
-    let password = document.querySelector("#logpass").value;
+join.addEventListener("click", async () => {
+    let username = document.querySelector("#username").value;
+    let gameId = document.querySelector("#gameId").value;
 
-    console.log(JSON.stringify({ username, password }));
-    if(!isValid(username) || !isValid(password)|| password.length < 6) return alert("Please enter valid username or password")
+    if(!isValid(username) || gameId.length < 6) return alert("Please enter valid username or Game Id")
 
     const user = {
         username,
-        password,
+        gameId,
     };
 
-    let data = await fetch(host + "/login?'", {
+    let data = await fetch(host + "/join", {
         method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(user),
     });
     data = await data.json();
-    if (data?.status !== 200) {
+    if (!data?.ok) {
         return alert(data.message)
     }
-    window.localStorage.setItem("user",data.user)
-    window.location = "../index.html"
+    window.localStorage.setItem("gameId",data.gameId)
+    window.location = "/"
 });
 
 function isValid(str) {

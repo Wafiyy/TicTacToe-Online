@@ -5,7 +5,7 @@ require("../db")
 function create(req,res){
   try {
     let {username} = req.body
-    username = username.trim()
+    username = username?.trim()
     console.log(req.body)
     if (!(/^(?=[a-zA-Z0-9._]{3,20}$)[^_.].*[^_.]$/.test(username))) {
       return reject(res, "Invalid Username")
@@ -43,7 +43,7 @@ function create(req,res){
             }
         )
   } catch (e) {
-    return reject(res, e.message())
+    return reject(res, e.message)
   }
 }
 

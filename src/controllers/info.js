@@ -7,6 +7,8 @@ function info(req,res){
     let playground = process.db.playground[gameId]
 
     res.json({
+        ok:true,
+        message: "OK",
         users,
         user,
         currentUser: turnUser,
