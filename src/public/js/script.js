@@ -1,7 +1,5 @@
 const statusDisplay = document.querySelector(".game--status");
 const displayId = document.querySelector("#gameId")
-let gameActive = true;
-let currentPlayer = "X";
 let startGame = document.querySelector(".game--restart")
 const buttons = document.querySelectorAll(".cell")
 
@@ -54,11 +52,19 @@ window.addEventListener("DOMContentLoaded",async () => {
       if(info.game.winnerId && !info.game.draw){
         let winner = info.users.find(el => el.id === info.game.winnerId)
         statusDisplay.innerHTML = winningMessage(winner.username)
-        setTimeout(() => window.location = "/login",5000)
+        setTimeout(() => {
+          removeItem("token")
+          window.localStorage.removeItem("gameId")
+          window.location = "/login"
+        },5000)
       }
       if(info.game.draw){
         statusDisplay.innerHTML = drawMessage()
-        setTimeout(() => window.location = "/login",5000)
+        setTimeout(() => {
+          removeItem("token")
+          window.localStorage.removeItem("gameId")
+          window.location = "/login"
+        },5000)
       }
     })
   },500)
@@ -100,4 +106,10 @@ function renderBoard(board){
   for (let i=0; i < buttons.length; i++){
     buttons[i].textContent = board[i]
   }
+}
+function removeItem(sKey, sPath, sDomain) {
+  document.cookie = encodeURIComponent(sKey) +
+      "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" +
+      (sDomain ? "; domain=" + sDomain : "") +
+      (sPath ? "; path=" + sPath : "");
 }

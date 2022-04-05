@@ -24,10 +24,15 @@ function checkWinner(gameId,id){
         }
         if (!board.includes("")) {
             process.db.game[gameId].draw = true
+            process.db.users[gameId].users.map(el => {
+                el.player = false
+                el.isTurn = false
+                return el
+            })
             return ""
         }
     }catch (e){
-        throw e
+        return reject(400,e.message)
     }
 }
 module.exports = checkWinner

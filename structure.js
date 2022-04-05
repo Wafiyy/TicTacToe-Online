@@ -1,6 +1,6 @@
 /*
     /create [POST]
-        * request [ username ]
+  * request [ username ]
         * response [ token,gameId ]
         * tasks
             * validate username

@@ -6,7 +6,7 @@ function start(req,res){
     if(req.token.user.id !== 1){
         return reject(res,"You are not admin")
     }
-    if(users.length < 2) return reject(res,"not enough users")
+    if(users.length < 2) return reject(res,"Not enough users")
     if(process.db.users[gameId].gameStart) return reject(res,"Game already started")
     process.db.users[gameId].gameStart = true
 
